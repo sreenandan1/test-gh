@@ -24,7 +24,18 @@ export class ImageGallaryComponent {
     this.files = this.fileService.getFiles();
   }
 
-
+  // Handle files dropped via ngx-file-drop
+  public dropped(files: NgxFileDropEntry[]) {
+    for (const droppedFile of files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          this.fileService.addFiles([file]);
+          this.files = this.fileService.getFiles();
+        });
+      }
+    }
+  }
 
   getImageUrl(file: File): string {
     return URL.createObjectURL(file);
