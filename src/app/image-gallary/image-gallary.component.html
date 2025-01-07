@@ -1,0 +1,14 @@
+
+<input type="file" multiple (change)="onfileSelected($event)">
+<mat-list >
+
+    <mat-list-item *ngFor="let file of files" >
+        <div class="example-box" cdkDrag>
+        <img class="img" [src]="getImageUrl(file)" (click)="openFullScreen(file)" >
+    </div>
+    </mat-list-item>
+   
+  </mat-list>
+
+
+
